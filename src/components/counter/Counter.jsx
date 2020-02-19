@@ -21,15 +21,30 @@ class Counter extends Component {
     render() {
         return (
             <div className="counter">
-                <CounterButton by={1} incrementMethod={this.increment}></CounterButton>
-                <CounterButton by={5} incrementMethod={this.increment}></CounterButton>
-                <CounterButton by={10} incrementMethod={this.increment}></CounterButton>
+                <CounterButton by={1}
+                    incrementMethod={this.increment}
+                    decrementMethod={this.decrement} />
+                <CounterButton by={5}
+                    incrementMethod={this.increment}
+                    decrementMethod={this.decrement} />
+                <CounterButton by={10}
+                    incrementMethod={this.increment}
+                    decrementMethod={this.decrement} />
 
                 <span className="count"
                     style={{ fontSize: "60px" }}
                 >
                     {this.state.counter}
                 </span>
+
+                <div>
+                    <button
+                        type="reset"
+                        style={{ backgroundColor: "red", padding: "15px", fontSize: "30px" }}
+                        onClick={this.reset}>
+                        Reset
+                    </button>
+                </div>
             </div>
         )
     }
@@ -37,7 +52,26 @@ class Counter extends Component {
     increment = (by) => {
         console.log(`increment in parent from child - ${by}`)
         this.setState(
-            () => { counter: this.state.counter + by }
+            (prevState) => {
+                return { counter: prevState.counter + by }
+            }
+        )
+    }
+
+    decrement = (by) => {
+        console.log(`decrement in parent from child - ${by}`)
+        this.setState(
+            (prevState) => {
+                return { counter: prevState.counter - by }
+            }
+        )
+    }
+
+    reset = () => {
+        this.setState(
+            () => {
+                return { counter: 0 }
+            }
         )
     }
 }

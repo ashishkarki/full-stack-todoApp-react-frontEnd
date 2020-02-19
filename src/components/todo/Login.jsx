@@ -19,8 +19,12 @@ class LoginComponent extends Component {
     render() {
         return (
             <div>
-                <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed} />
-                <ShowLoginSuccessMessage showSuccessMessage={this.state.showSuccessMessage}/>
+                {/* <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed} /> */}
+                {/* <ShowLoginSuccessMessage showSuccessMessage={this.state.showSuccessMessage}/> */}
+                {/* // if left hand is a boolean and if true, returns the right hand statement
+                //. otherwise if left hand is false, return false, meaning nothing will be displayed */}
+                {this.state.hasLoginFailed && <div>Invalid credentials!!!</div>}
+                {this.state.showSuccessMessage && <div>Login Successful</div>}
                 <input type="text" name="username" value={this.state.username} onChange={this.handleFieldChange} />
                 <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} />
 
@@ -54,20 +58,20 @@ class LoginComponent extends Component {
 
 }
 
-function ShowInvalidCredentials(props) {
-    if (props.hasLoginFailed) {
-        return <div>Invalid credentials!!!</div>
-    } 
+// function ShowInvalidCredentials(props) {
+//     if (props.hasLoginFailed) {
+//         return <div>Invalid credentials!!!</div>
+//     }
 
-    return null
-}
+//     return null
+// }
 
-function ShowLoginSuccessMessage(props) {
-    if(props.showSuccessMessage) {
-        return <div>Login Successful</div>
-    }
+// function ShowLoginSuccessMessage(props) {
+//     if (props.showSuccessMessage) {
+//         return <div>Login Successful</div>
+//     }
 
-    return null
-}
+//     return null
+// }
 
 export default LoginComponent

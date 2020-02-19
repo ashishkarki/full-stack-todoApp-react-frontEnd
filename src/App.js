@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import FirstComponent from './components/samples/FirstComponent';
-import OneFunctionComponent from './components/samples/OneFunctionComponent';
-import Counter from './components/counter/Counter'
 import './App.css';
- 
+import Counter from './components/counter/Counter';
+
 class App extends Component {
   render() {
     return (

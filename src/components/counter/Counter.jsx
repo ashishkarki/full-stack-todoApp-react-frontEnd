@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import './Counter.css'
 import CounterButton from './CounterButton'
+import logger from '../../global-functions';
 
 class Counter extends Component {
     // state
@@ -50,7 +51,7 @@ class Counter extends Component {
     }
 
     increment = (by) => {
-        console.log(`increment in parent from child - ${by}`)
+        logger(`increment in parent from child - ${by}`)
         this.setState(
             (prevState) => {
                 return { counter: prevState.counter + by }
@@ -59,7 +60,7 @@ class Counter extends Component {
     }
 
     decrement = (by) => {
-        console.log(`decrement in parent from child - ${by}`)
+        logger(`decrement in parent from child - ${by}`)
         this.setState(
             (prevState) => {
                 return { counter: prevState.counter - by }

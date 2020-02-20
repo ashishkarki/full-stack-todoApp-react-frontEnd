@@ -39,7 +39,6 @@ class LoginComponent extends Component {
     }
 
     handleFieldChange(event) {
-        // console.log('changed field: ' + event.target.name + ' to :' + event.target.value)
         this.setState({
             [event.target.name]: event.target.value
         })

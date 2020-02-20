@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import AuthenticationService from './AuthenticationService.js'
+
 class LoginComponent extends Component {
 
     constructor(props) {
@@ -46,6 +48,7 @@ class LoginComponent extends Component {
     loginClicked = () => {
         // no binding needed for this function since using arrow syntax
         if (this.state.username === "ashish") {
+            AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
             this.props.history.push(`/welcome/${this.state.username}`)
             this.setState({
                 showSuccessMessage: true,

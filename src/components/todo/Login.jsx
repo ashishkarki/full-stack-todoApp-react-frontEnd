@@ -42,7 +42,7 @@ class LoginComponent extends Component {
 
     loginClicked = () => {
         // no binding needed for this function since using arrow syntax
-        if (this.state.username == "ashish") {
+        if (this.state.username === "ashish") {
             this.props.history.push(`/welcome/${this.state.username}`)
             this.setState({
                 showSuccessMessage: true,

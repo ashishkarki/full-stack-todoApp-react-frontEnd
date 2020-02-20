@@ -19,16 +19,19 @@ class LoginComponent extends Component {
     render() {
         return (
             <div>
-                {/* <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed} /> */}
-                {/* <ShowLoginSuccessMessage showSuccessMessage={this.state.showSuccessMessage}/> */}
-                {/* // if left hand is a boolean and if true, returns the right hand statement
+                <h1>Login</h1>
+                <div className="container">
+                    {/* <ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed} /> */}
+                    {/* <ShowLoginSuccessMessage showSuccessMessage={this.state.showSuccessMessage}/> */}
+                    {/* // if left hand is a boolean and if true, returns the right hand statement
                 //. otherwise if left hand is false, return false, meaning nothing will be displayed */}
-                {this.state.hasLoginFailed && <div>Invalid credentials!!!</div>}
-                {this.state.showSuccessMessage && <div>Login Successful</div>}
-                <input type="text" name="username" value={this.state.username} onChange={this.handleFieldChange} />
-                <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} />
+                    {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid credentials!!!</div>}
+                    {this.state.showSuccessMessage && <div>Login Successful</div>}
+                    <input type="text" name="username" value={this.state.username} onChange={this.handleFieldChange} />
+                    <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} />
 
-                <button type="submit" onClick={this.loginClicked}>Login</button>
+                    <button className="btn btn-success" type="submit" onClick={this.loginClicked}>Login</button>
+                </div>
             </div>
         )
     }

@@ -7,8 +7,8 @@ class ListTodosComponent extends Component {
         this.state = {
             todos: [
                 { id: 1, description: 'Start With React', done: false, targetDate: new Date() },
-                { id: 2, description: 'Visit Nepal in 2020', done: false, targetDate: new Date()  },
-                { id: 3, description: 'Learn Kung fu', done: false, targetDate: new Date()  }
+                { id: 2, description: 'Visit Nepal in 2020', done: false, targetDate: new Date() },
+                { id: 3, description: 'Learn Kung fu', done: false, targetDate: new Date() }
             ]
         }
     }
@@ -17,31 +17,32 @@ class ListTodosComponent extends Component {
         return (
             <div>
                 <h1>List of Todos</h1>
-                <hr />
-                <table>
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>description</th>
-                            <th>Target Date</th>
-                            <th>Is Completed?</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.todos.map(
-                                (todo, index) =>
-                                    <tr key={index}>
-                                        <td>{todo.id}</td>
-                                        <td>{todo.description}</td>
-                                        <td>{todo.targetDate.toString()}</td>
-                                        <td>{todo.done.toString()}</td>
-                                    </tr>
+                <div className="container">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>description</th>
+                                <th>Target Date</th>
+                                <th>Is Completed?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.todos.map(
+                                    (todo, index) =>
+                                        <tr key={index}>
+                                            <td>{todo.id}</td>
+                                            <td>{todo.description}</td>
+                                            <td>{todo.targetDate.toString()}</td>
+                                            <td>{todo.done.toString()}</td>
+                                        </tr>
 
-                            )
-                        }
-                    </tbody>
-                </table>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }

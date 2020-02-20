@@ -10,7 +10,7 @@ class HeaderComponent extends Component {
                         <a href="http://www.github.com/ashishkarki" className="navbar-brand">Ashish's Todo List App</a>
                     </div>
                     <ul className="navbar-nav">
-                        <li><Link className="nav-link" to="/welcome">Home</Link></li>
+                        <li><Link className="nav-link" to="/welcome/ashish">Home</Link></li>
                         <li><Link className="nav-link" to="/todos">Todos</Link></li>
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">

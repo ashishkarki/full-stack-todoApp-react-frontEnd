@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { withRouter } from 'react-router'
 import AuthenticationService from './AuthenticationService.js'
 import logger from "../../global-functions.js";
 
@@ -31,4 +32,4 @@ class HeaderComponent extends Component {
     }
 }
 
-export default HeaderComponent
+export default withRouter(HeaderComponent)

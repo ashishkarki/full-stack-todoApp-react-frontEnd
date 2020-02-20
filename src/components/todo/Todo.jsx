@@ -5,6 +5,8 @@ import './Todo.css'
 import LoginComponent from './Login'
 import WelcomeComponent from './Welcome';
 import ListTodosComponent from './ListTodos'
+import HeaderComponent from './Header'
+import FooterComponent from './Footer'
 
 class TodoApp extends Component {
 
@@ -18,6 +20,7 @@ class TodoApp extends Component {
 
                 <Router>
                     <>
+                        <HeaderComponent />
                         <Switch>
                             <Route path="/" exact component={LoginComponent} />
                             <Route path="/login" component={LoginComponent} />
@@ -25,6 +28,7 @@ class TodoApp extends Component {
                             <Route path="/todos" component={ListTodosComponent} />
                             <Route component={ErrorComponent} />
                         </Switch>
+                        <FooterComponent />
                     </>
                 </Router>
                 {/* <LoginComponent></LoginComponent>

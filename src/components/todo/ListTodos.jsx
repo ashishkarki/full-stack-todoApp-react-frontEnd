@@ -17,6 +17,7 @@ class ListTodosComponent extends Component {
 
         this.deleteTodo = this.deleteTodo.bind(this)
         this.refreshTodos = this.refreshTodos.bind(this)
+        this.updateTodo = this.updateTodo.bind(this)
     }
 
     // called right after constructor and good place to call apis
@@ -47,6 +48,12 @@ class ListTodosComponent extends Component {
             })
     }
 
+    updateTodo(todo_id) {
+        const username = AuthenticationService.getLoggedInUsername()
+        logger(`updating ${username}'s todo with id: ${todo_id}`)
+        this.props.history.push(`/todos/${todo_id}`)
+    }
+
     render() {
         logger('render')
         return (
@@ -70,6 +77,7 @@ class ListTodosComponent extends Component {
                                 <th>Target Date</th>
                                 <th>Is Completed?</th>
                                 <th>Delete</th>
+                                <th>Update</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,6 +89,7 @@ class ListTodosComponent extends Component {
                                             <td>{todo.description}</td>
                                             <td>{todo.targetDate.toString()}</td>
                                             <td>{todo.done.toString()}</td>
+                                            <td><button className="btn btn-success" onClick={() => this.updateTodo(todo.id)}>Update</button></td>
                                             <td><button className="btn btn-warning" onClick={() => this.deleteTodo(todo.id)}>Delete</button></td>
                                         </tr>
 

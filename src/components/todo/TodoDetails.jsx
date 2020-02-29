@@ -17,6 +17,9 @@ class TodoDetailsComponent extends Component {
     }
 
     componentDidMount() {
+        // don't load stuff if this is a create request with id = -1
+        if (this.state.id === -1) return
+
         const username = AuthenticationService.getLoggedInUsername()
         TodoDataService.retrieveTodoWithUsernameAndTodoId(username, this.state.id)
             .then(response => {
@@ -29,6 +32,27 @@ class TodoDetailsComponent extends Component {
 
     onSubmit = (values) => {
         logger('from onSubmit')
+
+        const username = AuthenticationService.getLoggedInUsername()
+        const id = this.state.id
+        const tempTodo = {
+            id: id,
+            description: values.description,
+            targetDate: values.targetDate
+        }
+
+        if (id === -1) {
+            // this  is a create new todo request
+            TodoDataService.createTodo(username, tempTodo)
+                .then(() => {
+                    this.props.history.push('/todos')
+                })
+        } else {
+            TodoDataService.updateTodo(username, id, tempTodo)
+                .then(() => {
+                    this.props.history.push('/todos')
+                })
+        }
     }
 
     validate = (values) => {

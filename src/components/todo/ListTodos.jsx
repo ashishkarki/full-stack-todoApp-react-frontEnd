@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import TodoDataService from '../../api/todo/TodoDataService'
 import AuthenticationService from './AuthenticationService.js'
 import logger from "../../global-functions";
+import moment from 'moment'
 import './ListTodos.css'
 
 class ListTodosComponent extends Component {
@@ -18,6 +19,7 @@ class ListTodosComponent extends Component {
         this.deleteTodo = this.deleteTodo.bind(this)
         this.refreshTodos = this.refreshTodos.bind(this)
         this.updateTodo = this.updateTodo.bind(this)
+        this.addNewTodo = this.addNewTodo.bind(this)
     }
 
     // called right after constructor and good place to call apis
@@ -54,6 +56,11 @@ class ListTodosComponent extends Component {
         this.props.history.push(`/todos/${todo_id}`)
     }
 
+    addNewTodo() {
+        logger('addNewTodo called')
+        this.props.history.push(`/todos/-1`)
+    }
+
     render() {
         logger('render')
         return (
@@ -87,16 +94,20 @@ class ListTodosComponent extends Component {
                                         <tr key={index}>
                                             <td>{todo.id}</td>
                                             <td>{todo.description}</td>
-                                            <td>{todo.targetDate.toString()}</td>
+                                            <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
                                             <td>{todo.done.toString()}</td>
-                                            <td><button className="btn btn-success" onClick={() => this.updateTodo(todo.id)}>Update</button></td>
-                                            <td><button className="btn btn-warning" onClick={() => this.deleteTodo(todo.id)}>Delete</button></td>
+                                            <td><button className="btn btn-info" onClick={() => this.updateTodo(todo.id)}>Update</button></td>
+                                            <td><button className="btn btn-danger" onClick={() => this.deleteTodo(todo.id)}>Delete</button></td>
                                         </tr>
 
                                 )
                             }
                         </tbody>
                     </table>
+
+                    <div className="row">
+                        <button className="btn btn-success" onClick={this.addNewTodo}>Add Todo</button>
+                    </div>
                 </div>
             </div>
         )

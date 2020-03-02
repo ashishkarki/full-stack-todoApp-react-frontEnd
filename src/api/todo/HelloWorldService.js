@@ -9,7 +9,15 @@ class HelloWorldService {
     }
 
     executeHelloWorldServiceBeanPathVariable(name) {
-        return Axios.get(`http://localhost:8080/hello-world/path-variable/${name}`)
+        const username = 'user'
+        const password = 'password'
+        const basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password)
+
+        return Axios.get(`http://localhost:8080/hello-world/path-variable/${name}`, {
+            headers: {
+                authorization: basicAuthHeader
+            }
+        })
     }
 }
 

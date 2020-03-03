@@ -46,19 +46,36 @@ class LoginComponent extends Component {
 
     loginClicked = () => {
         // no binding needed for this function since using arrow syntax
-        if (this.state.username === "ashish") {
+        // if (this.state.username === 'user' && this.state.password === 'password') {
+        //     AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+        //     this.props.history.push(`/welcome/${this.state.username}`)
+        //     this.setState({
+        //         showSuccessMessage: true,
+        //         hasLoginFailed: false
+        //     })
+        // } else {
+        //     this.setState({
+        //         showSuccessMessage: false,
+        //         hasLoginFailed: true
+        //     })
+        // }
+
+        AuthenticationService.executeBasicAuthService(
+            this.state.username,
+            this.state.password
+        ).then(() => {
             AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
             this.props.history.push(`/welcome/${this.state.username}`)
             this.setState({
                 showSuccessMessage: true,
                 hasLoginFailed: false
             })
-        } else {
+        }).catch(() => {
             this.setState({
                 showSuccessMessage: false,
                 hasLoginFailed: true
             })
-        }
+        })
     }
 
 }

@@ -3,10 +3,20 @@ import Axios from "axios"
 
 class AuthenticationService {
 
+    executeBasicAuthService(username, password) {
+        logger(`user: ${username}, pw: ${password}`)
+        return Axios.get('http://localhost:8080/basicauth', {
+            headers: {
+                authorization: this.createBasicAuthToken(username, password)
+            }
+        })
+    }
+
     registerSuccessfulLogin(username, password) {
         logger('registerSuccessfulLogin')
         sessionStorage.setItem('authenticatedUser', username)
-        this.setupAxiosInterceptors()
+
+        this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
     }
 
     logout() {
@@ -27,10 +37,10 @@ class AuthenticationService {
         return user
     }
 
-    setupAxiosInterceptors() {
-        const username = 'user'
-        const password = 'password'
-        const basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password)
+    setupAxiosInterceptors(basicAuthHeader) {
+        // const username = 'user'
+        // const password = 'password'
+        // const basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password)
 
         // Add a request interceptor
         Axios.interceptors.request.use(
@@ -41,6 +51,10 @@ class AuthenticationService {
 
                 return config
             })
+    }
+
+    createBasicAuthToken(username, password) {
+        return 'Basic ' + window.btoa(username + ":" + password)
     }
 }
 

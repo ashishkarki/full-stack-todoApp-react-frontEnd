@@ -1,37 +1,54 @@
 import logger from "../../global-functions"
 import Axios from "axios"
 
+import * as constants from './todo-constants'
+
 class AuthenticationService {
 
     executeBasicAuthService(username, password) {
         logger(`user: ${username}, pw: ${password}`)
-        return Axios.get('http://localhost:8080/basicauth', {
+        return Axios.get(`${constants.LOCALHOST_API_URL}/basicauth`, {
             headers: {
                 authorization: this.createBasicAuthToken(username, password)
             }
         })
     }
 
+    executeJwtAuthService(username, password) {
+        logger(`user: ${username}, pw: ${password}`)
+        return Axios.post(`${constants.LOCALHOST_API_URL}/authenticate`, {
+            username,
+            password
+        })
+    }
+
     registerSuccessfulLogin(username, password) {
         logger('registerSuccessfulLogin')
-        sessionStorage.setItem('authenticatedUser', username)
+        sessionStorage.setItem(constants.USER_SESSION_ATTRIBUTE_NAME, username)
 
         this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
     }
 
+    registerSuccessfulLoginForJwt(username, token) {
+        logger('registerSuccessfulLoginForJwt')
+        sessionStorage.setItem(constants.USER_SESSION_ATTRIBUTE_NAME, username)
+
+        this.setupAxiosInterceptors(this.createJwtAuthToken(token))
+    }
+
     logout() {
-        sessionStorage.removeItem('authenticatedUser')
+        sessionStorage.removeItem(constants.USER_SESSION_ATTRIBUTE_NAME)
     }
 
     isUserLoggedIn() {
-        let user = sessionStorage.getItem('authenticatedUser')
+        let user = sessionStorage.getItem(constants.USER_SESSION_ATTRIBUTE_NAME)
 
         if (user === null) return false
         return true
     }
 
     getLoggedInUsername() {
-        const user = sessionStorage.getItem('authenticatedUser')
+        const user = sessionStorage.getItem(constants.USER_SESSION_ATTRIBUTE_NAME)
 
         if (user === null) return false
         return user
@@ -55,6 +72,10 @@ class AuthenticationService {
 
     createBasicAuthToken(username, password) {
         return 'Basic ' + window.btoa(username + ":" + password)
+    }
+
+    createJwtAuthToken(token) {
+        return 'Bearer ' + token
     }
 }
 

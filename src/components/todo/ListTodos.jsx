@@ -47,7 +47,7 @@ class ListTodosComponent extends Component {
                     { message: `Deleted todo with id: ${todo_id}` }
                 )
                 this.refreshTodos()
-            })
+            }).catch(err => logger('error is ' + err))
     }
 
     updateTodo(todo_id) {

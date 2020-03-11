@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import AuthenticationService from './AuthenticationService.js'
+import logger from "../../global-functions.js";
 
 class LoginComponent extends Component {
 
@@ -32,7 +33,12 @@ class LoginComponent extends Component {
                     <input type="text" name="username" value={this.state.username} onChange={this.handleFieldChange} />
                     <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} />
 
-                    <button className="btn btn-success" type="submit" onClick={this.loginClicked}>Login</button>
+                    <button
+                        className="btn btn-success"
+                        type="submit"
+                        onClick={this.loginClicked}>
+                        Login
+                            </button>
                 </div>
             </div>
         )
@@ -45,6 +51,7 @@ class LoginComponent extends Component {
     }
 
     loginClicked = () => {
+        logger('loginClicked')
         // no binding needed for this function since using arrow syntax
         // if (this.state.username === 'user' && this.state.password === 'password') {
         //     AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
